@@ -1,0 +1,10 @@
+1. Create Maven Project.
+2. Add the following in pom.xml:
+    <dependencies>
+        <dependency>
+            <groupId>se.soprasteria</groupId>
+            <artifactId>pigeon</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+    </dependencies>
+3. in test/resources Create <project>_config.xml

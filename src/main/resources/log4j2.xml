@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="se.soprasteria.automatedtesting.webdriver.api.base">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false"  pattern="%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}"/>
+
+            <!--PatternLayout pattern="%M %d{HH:mm:ss:SSS} %-5level [%-20.20c{1}] - %msg%n" /-->
+        </Console>
+        <File name="file" fileName="target/surefire-reports/full_test_log.txt">
+            <PatternLayout pattern="%M %d{HH:mm:ss:SSS} %-5level [%-20.20c{1}] - %msg%n" />
+        </File>
+        <TestNGCustom name="testreports"/>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="testreports"/>
+        </Root>
+    </Loggers>
+</Configuration>
