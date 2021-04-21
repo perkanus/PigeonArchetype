@@ -3,7 +3,7 @@
 
     <!-- Properties -->
     <properties>
-        <property name="url_mainpage" value="http://slnwtapp040/softfunk/main.aspx"/>
+        <property name="url_mainpage" value="http://automationpractice.com/index.php"/>
         <property name="config.video.record" value="true"/>
     </properties>
 
@@ -14,6 +14,6 @@
 
     <!-- Drivers -->
     <drivers>
-        <driver id="chromedriver" type="ChromeDriver" version="83"/>
+        <driver id="chromedriver" type="ChromeDriver" version="90"/>
     </drivers>
 </config>

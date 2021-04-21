@@ -14,8 +14,9 @@ public class L1Tests extends BaseTest {
 
     @Test(dataProvider = "getDriver", groups = {"standard"}, priority = 0)
     public void L1T2(AutomationDriver driver)  {
-        Assert.assertTrue(l1Page.F1(), "");
-        Assert.assertTrue(l1Page.F2(), "FAIL!");
+        Assert.assertTrue(l1Page.isPageLoaded(), "loginPage.performLogin() failed");
+        Assert.assertTrue(l1Page.FindLogo(),"Doesn't work");
+
 
     }
 
