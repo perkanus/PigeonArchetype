@@ -11,15 +11,10 @@ import se.soprasteria.automatedtesting.webdriver.helpers.driver.AutomationDriver
 import java.io.IOException;
 
 public class Login extends BasePageObject implements Login_Interface {
-    @FindBy(xpath = "//*[@id='component_uppgifter_gridBodyContainer']")
-    protected WebElement uppgifterTabell;
-
-    @FindBy(xpath = "//*[@id='TabnavTabLogoTextId']")
-    protected WebElement CRMButton;
-
+/*
     @FindBy(xpath = "//*[@id='TabCS-main']")
     protected WebElement ArendehanteringButton;
-
+*/
 
     public Login(AutomationDriver driver) {
         super(driver);
@@ -31,16 +26,17 @@ public class Login extends BasePageObject implements Login_Interface {
         try
         {
 
-            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt( "contentIFrame0"));
-            wait.until(ExpectedConditions.elementToBeClickable(uppgifterTabell));
-            driver.switchTo().defaultContent();
-            wait.until(ExpectedConditions.elementToBeClickable(CRMButton));
-            drawBorder(CRMButton, "red", 5);
-            sleep(2000);
-            wait.until(ExpectedConditions.elementToBeClickable(ArendehanteringButton));
-            drawBorder(ArendehanteringButton, "blue", 5);
-            //wait.until(ExpectedConditions.elementToBeClickable(CRMButton)).click();
-            //sleep(5000);
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("//*[@id=\"showelement\"]"))).click();
+            sleep(10000);
+            /*
+            wait.until(ExpectedConditions.elementToBeClickable(webElement_editInput));
+            drawBorder(webElement_editInput, "red", 2);
+            sleep(5000);
+             /*
+            wait.until(ExpectedConditions.elementToBeClickable(webElement_buttonSearch));
+            drawBorder(webElement_buttonSearch, "red", 2);
+            sleep(5000);
+            */
 
         }
         catch (Exception ex)
@@ -51,30 +47,8 @@ public class Login extends BasePageObject implements Login_Interface {
         // TODO: IMPLEMENT
         logger.info("Verifying that the login has occured.");
         return true;
-
-
-        //return elementHelper.isElementDisplayedWithinTime(loginButton, 5000);
     }
 
-
-    public boolean performLogin(){
-        try {
-            ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe", "C:\\work\\Username.au3");
-            Process p = pb.start();
-            sleep(2000);
-            logger.info("Typed username");
-            ProcessBuilder pa = new ProcessBuilder("C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe", "C:\\work\\password.au3");
-            Process p_a = pa.start();
-            logger.info("Typed password");
-            return true;
-        }
-        catch (IOException e) {
-            System.out.println("exception happened - here's what I know: ");
-            e.printStackTrace();
-            System.exit(-1);
-            return false;
-        }
-    }
 
     public void drawBorder(String xpath, String color, int width) {
         WebElement element_node = driver.findElement(By.xpath(xpath));
