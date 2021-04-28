@@ -1,7 +1,7 @@
 package Tutorial.L1;
 
-import base.BaseTest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +13,8 @@ import se.soprasteria.automatedtesting.webdriver.helpers.driver.AutomationDriver
 
 public class L1 extends BasePageObject implements L1_Interface {
 
+    private boolean VISUAL_DEBUG =true;
+
 
     @FindBy (xpath = "//*[@id=\"block_contact_infos\"]/div/ul/li[3]/i")
     protected WebElement emailLogo;
@@ -20,8 +22,15 @@ public class L1 extends BasePageObject implements L1_Interface {
     @FindBy (xpath = "//*[@id=\"header_logo\"]/a/img")
     protected WebElement homeLogo;
 
-    @FindBy (id = "searchbox")
+    @FindBy (id = "search_query_top")
     protected WebElement searchBox;
+
+    @FindBy (name = "submit_search")
+    protected WebElement searchButton;
+
+
+
+
 
 
 
@@ -29,6 +38,19 @@ public class L1 extends BasePageObject implements L1_Interface {
     public L1(AutomationDriver driver) {
         super(driver);
     }
+
+
+    @Override
+    public void drawBorder(String xpath){
+        WebElement element_node = driver.findElement(By.xpath(xpath));
+        driver.executeJavaScript("arguments[0].style.border='3px solid red'", element_node);
+    }
+    @Override
+    public void drawBorder(WebElement element_node){
+        driver.executeJavaScript("arguments[0].style.border='3px solid red'", element_node);
+    }
+
+
 
     public boolean isPageLoaded() {
         WebDriverWait wait = new WebDriverWait(driver,20);
@@ -45,11 +67,12 @@ public class L1 extends BasePageObject implements L1_Interface {
 
 
 
-
     public boolean FindLogo() {
         WebDriverWait wait = new WebDriverWait(driver,20);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(homeLogo)).click();
+            if (VISUAL_DEBUG)
+                drawBorder(homeLogo);
             return true;
         }
         catch (Exception e){
@@ -58,6 +81,111 @@ public class L1 extends BasePageObject implements L1_Interface {
         }
         finally {
             logger.info("Fade på fredag!");
+
+        }
+    }
+
+    public boolean FindSearch() {
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox));
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+            if (VISUAL_DEBUG)
+            {
+                drawBorder(searchBox);
+                drawBorder(searchButton);
+            }
+            return true;
+        }
+        catch (Exception e){
+            logger.error("Johnny B good"+e.getMessage());
+            return false;
+        }
+        finally {
+            logger.info("Searchbox found");
+
+        }
+    }
+
+    public boolean SearchByButton(){
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys("Dress");
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+            if (VISUAL_DEBUG)
+            {
+                drawBorder(searchBox);
+                drawBorder(searchButton);
+            }
+            return true;
+        }
+        catch (Exception e){
+            logger.error("Johnny B good"+e.getMessage());
+            return false;
+        }
+        finally {
+            logger.info("Searchbox found");
+
+        }
+    }
+
+    public boolean SearchByEnter(){
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys("Dress");
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys(Keys.ENTER);
+            if (VISUAL_DEBUG)
+            {
+                drawBorder(searchBox);
+            }
+            return true;
+        }
+        catch (Exception e){
+            logger.error("Johnny B good"+e.getMessage());
+            return false;
+        }
+        finally {
+            logger.info("Searchbox found");
+
+        }
+    }
+
+
+    public enum menuItems {
+        WOMEN, DRESSES, T_SHIRTS
+    }
+    @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a")
+    protected WebElement womenMenu;
+    @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/a")
+    protected WebElement dressesMenu;
+    @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a")
+    protected WebElement tshirtsMenu;
+
+    public boolean SelectInMenu(menuItems item){
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        try {
+            switch (item)
+            {
+                case WOMEN:
+                    wait.until(ExpectedConditions.elementToBeClickable(womenMenu)).click();
+                    break;
+                case DRESSES:
+                    wait.until(ExpectedConditions.elementToBeClickable(dressesMenu)).click();
+                    break;
+                case T_SHIRTS:
+                    wait.until(ExpectedConditions.elementToBeClickable(tshirtsMenu)).click();
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+        catch (Exception e){
+            logger.error("Johnny B good"+e.getMessage());
+            return false;
+        }
+        finally {
+            logger.info("Searchbox found");
 
         }
     }

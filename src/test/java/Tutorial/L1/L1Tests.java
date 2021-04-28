@@ -7,16 +7,41 @@ import se.soprasteria.automatedtesting.webdriver.helpers.driver.AutomationDriver
 
 public class L1Tests extends BaseTest {
     @Test(dataProvider = "getDriver", groups = {"standard"}, priority = 0)
-    public void L1T1(AutomationDriver driver)  {
+    public void IsPageLoaded(AutomationDriver driver)  {
         Assert.assertTrue(l1Page.isPageLoaded(), "loginPage.performLogin() failed");
 
     }
 
     @Test(dataProvider = "getDriver", groups = {"standard"}, priority = 0)
-    public void L1T2(AutomationDriver driver)  {
+    public void FindSearchItems(AutomationDriver driver)  {
         Assert.assertTrue(l1Page.isPageLoaded(), "loginPage.performLogin() failed");
         Assert.assertTrue(l1Page.FindLogo(),"Doesn't work");
+        Assert.assertTrue(l1Page.FindSearch(),"Doesn't");
+        sleep(2000);
 
+
+    }
+
+    @Test(dataProvider = "getDriver")
+    public void SearchByButton(AutomationDriver driver){
+        Assert.assertTrue(l1Page.isPageLoaded(),"loginPage.performlogin");
+        Assert.assertTrue(l1Page.SearchByButton(),"SearchByButton Failed!");
+
+    }
+
+    @Test(dataProvider = "getDriver")
+    public void SearchByEnter(AutomationDriver driver){
+        Assert.assertTrue(l1Page.isPageLoaded(),"loginPage.performlogin");
+        Assert.assertTrue(l1Page.SearchByEnter(),"SearchByEnter Failed!");
+
+    }
+
+    @Test(dataProvider = "getDriver")
+    public void SelectInMenu(AutomationDriver driver){
+        Assert.assertTrue(l1Page.isPageLoaded(),"loginPage.performlogin");
+        Assert.assertTrue(l1Page.SelectInMenu(L1.menuItems.WOMEN),"SearchByEnter Failed!");
+        Assert.assertTrue(l1Page.SelectInMenu(L1.menuItems.DRESSES),"SearchByEnter Failed!");
+        Assert.assertTrue(l1Page.SelectInMenu(L1.menuItems.T_SHIRTS),"SearchByEnter Failed!");
 
     }
 
