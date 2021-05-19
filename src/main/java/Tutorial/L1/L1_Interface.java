@@ -1,5 +1,6 @@
 package Tutorial.L1;
 
+import Data.TestData;
 import org.openqa.selenium.WebElement;
 
 public interface L1_Interface {
@@ -15,5 +16,6 @@ public interface L1_Interface {
     public abstract boolean SearchByButton();
     public abstract boolean SearchByButton(String searchItem);
 
-    public abstract boolean SelectInMenu(L1.menuItems item);
+    public abstract boolean SelectInMenu(TestData.menuItems item);
+    public abstract boolean SelectInMenuAdvanced(TestData.Menu item);
 }

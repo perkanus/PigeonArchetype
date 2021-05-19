@@ -1,5 +1,6 @@
 package Tutorial.L1;
 
+import Data.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -181,9 +182,7 @@ public class L1 extends BasePageObject implements L1_Interface {
     }
 
 
-    public enum menuItems {
-        WOMEN, DRESSES, T_SHIRTS
-    }
+
     @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/a")
     protected WebElement womenMenu;
     @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/a")
@@ -191,7 +190,7 @@ public class L1 extends BasePageObject implements L1_Interface {
     @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a")
     protected WebElement tshirtsMenu;
 
-    public boolean SelectInMenu(menuItems item){
+    public boolean SelectInMenu(TestData.menuItems item){
         WebDriverWait wait = new WebDriverWait(driver,20);
         try {
             switch (item)
@@ -217,6 +216,28 @@ public class L1 extends BasePageObject implements L1_Interface {
         finally {
             logger.info("Searchbox found");
 
+        }
+    }
+
+    @Override
+    public boolean SelectInMenuAdvanced (TestData.Menu items2){
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        try {
+            switch (items2) {
+                case WOMEN:
+                    wait.until(ExpectedConditions.elementToBeClickable(womenMenu)).click();
+                    break;
+                case DRESSESMAIN:
+                    wait.until(ExpectedConditions.elementToBeClickable(dressesMenu)).click();
+                    break;
+                case TSHIRT:
+                    wait.until(ExpectedConditions.elementToBeClickable(tshirtsMenu)).click();
+                    break;
+            }
+            return true;
+        } catch (Exception e) {
+            logger.error("Johnny B good" + e.getMessage());
+            return false;
         }
     }
 
