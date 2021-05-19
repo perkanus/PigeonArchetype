@@ -50,7 +50,10 @@ public class L1 extends BasePageObject implements L1_Interface {
         driver.executeJavaScript("arguments[0].style.border='3px solid red'", element_node);
     }
 
-
+    @Override
+    public void drawBorder(WebElement element_node, String color, int width) {
+        driver.executeJavaScript("arguments[0].style.border='"+ width + "px solid " + color + "'", element_node);
+    }
 
     public boolean isPageLoaded() {
         WebDriverWait wait = new WebDriverWait(driver,20);
@@ -72,7 +75,8 @@ public class L1 extends BasePageObject implements L1_Interface {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(homeLogo)).click();
             if (VISUAL_DEBUG)
-                drawBorder(homeLogo);
+                drawBorder(homeLogo, "green", 5);
+                //drawBorder(homeLogo);
             return true;
         }
         catch (Exception e){
@@ -110,7 +114,32 @@ public class L1 extends BasePageObject implements L1_Interface {
     public boolean SearchByButton(){
         WebDriverWait wait = new WebDriverWait(driver,20);
         try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).clear();
             wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys("Dress");
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+            if (VISUAL_DEBUG)
+            {
+                drawBorder(searchBox);
+                drawBorder(searchButton);
+            }
+            return true;
+        }
+        catch (Exception e){
+            logger.error("Johnny B good"+e.getMessage());
+            return false;
+        }
+        finally {
+            logger.info("Searchbox found");
+
+        }
+    }
+
+    @Override
+    public boolean SearchByButton(String searchItem) {
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys(searchItem);
             wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
             if (VISUAL_DEBUG)
             {
@@ -132,6 +161,7 @@ public class L1 extends BasePageObject implements L1_Interface {
     public boolean SearchByEnter(){
         WebDriverWait wait = new WebDriverWait(driver,20);
         try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchBox)).clear();
             wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys("Dress");
             wait.until(ExpectedConditions.elementToBeClickable(searchBox)).sendKeys(Keys.ENTER);
             if (VISUAL_DEBUG)

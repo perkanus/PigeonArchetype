@@ -22,11 +22,17 @@ public class L1Tests extends BaseTest {
 
     }
 
+    public String[] grejer = {"Dress", "Summer", "Casual"};
+
     @Test(dataProvider = "getDriver")
     public void SearchByButton(AutomationDriver driver){
+        for(int i = 0; i < grejer.length; i++)
+        {
+            Assert.assertTrue(l1Page.SearchByButton(grejer[i]),"SearchByButton Failed!");
+            logger.error("Söker efter " + grejer[i]);
+        }
         Assert.assertTrue(l1Page.isPageLoaded(),"loginPage.performlogin");
         Assert.assertTrue(l1Page.SearchByButton(),"SearchByButton Failed!");
-
     }
 
     @Test(dataProvider = "getDriver")
