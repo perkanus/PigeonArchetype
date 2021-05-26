@@ -59,8 +59,12 @@ public class L1Tests extends BaseTest {
     public void SelectInMenuAdvanced(AutomationDriver driver){
         Assert.assertTrue(l1Page.isPageLoaded(),"loginPage.performlogin");
         Assert.assertTrue(l1Page.SelectInMenuAdvanced(TestData.Menu.WOMEN),"SearchByEnter Failed!");
+        //Assert.assertTrue(l1Page.SelectInMenuAdvanced(TestData.Menu.TOPS),"SearchByEnter Failed!");
+        //fÖRSÖK ATT FÅ FRAM HOVER FUNKTIONALITET GENOM JSKRIPT
         Assert.assertTrue(l1Page.SelectInMenuAdvanced(TestData.Menu.DRESSESMAIN),"SearchByEnter Failed!");
         Assert.assertTrue(l1Page.SelectInMenuAdvanced(TestData.Menu.TSHIRT),"SearchByEnter Failed!");
+        //Assert.assertTrue(l1Page.SelectInMenuAdvanced(TestData.Menu.CASUAL),"SearchByEnter Failed!");
+
 
     }
 

@@ -189,6 +189,10 @@ public class L1 extends BasePageObject implements L1_Interface {
     protected WebElement dressesMenu;
     @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a")
     protected WebElement tshirtsMenu;
+    @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/ul/li[1]/a")
+    protected WebElement topsMenu;
+    @FindBy (xpath = "//*[@id=\"block_top_menu\"]/ul/li[2]/ul/li[1]/a")
+    protected WebElement casualMenu;
 
     public boolean SelectInMenu(TestData.menuItems item){
         WebDriverWait wait = new WebDriverWait(driver,20);
@@ -204,7 +208,7 @@ public class L1 extends BasePageObject implements L1_Interface {
                 case T_SHIRTS:
                     wait.until(ExpectedConditions.elementToBeClickable(tshirtsMenu)).click();
                     break;
-                default:
+                    default:
                     break;
             }
             return true;
@@ -232,6 +236,13 @@ public class L1 extends BasePageObject implements L1_Interface {
                     break;
                 case TSHIRT:
                     wait.until(ExpectedConditions.elementToBeClickable(tshirtsMenu)).click();
+                    break;
+                case TOPS:
+                    wait.until(ExpectedConditions.elementToBeClickable(topsMenu)).click();
+                    break;
+                case CASUAL:
+                    wait.until(ExpectedConditions.elementToBeClickable(casualMenu)).click();
+                default:
                     break;
             }
             return true;
